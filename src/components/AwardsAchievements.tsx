@@ -49,7 +49,7 @@ const AwardsAchievements = () => {
           }}
           transition={{
             repeat: Infinity,
-            duration: 20,
+            duration: 5,
             ease: "linear",
           }}
         >

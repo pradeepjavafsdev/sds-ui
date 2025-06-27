@@ -86,11 +86,8 @@ const AboutUs = () => {
         <VStack align="flex-start" spacing={1} flex="1">
           <Text fontWeight="bold">Contact</Text>
           <Text>Suryadev Seeds</Text>
-          <Text>25 Harvest Lane, Greenfield District</Text>
-          <Text>Springhaven, CA 92845</Text>
-          <Text>India</Text>
           <Text>info@suryadevseeds.in</Text>
-          <Text>9437950194 / 9439693245</Text>
+          <Text>+91 9437950194 / +91 9439693245</Text>
         </VStack>
       </Flex>
 
@@ -104,12 +101,45 @@ const AboutUs = () => {
         pt={6}
       >
         <Text fontSize="sm">©2025 Suryadev Seeds</Text>
-        <Heading fontSize={["2xl", "4xl"]}>
-          Suryadev
-          <Box as="span" color="green.500">
-            Seeds
-          </Box>
-        </Heading>
+        <VStack
+          spacing={1}
+          align="start"
+          cursor="pointer"
+          transition="all 0.3s ease"
+          transitionDelay="0.1s"
+        >
+          <HStack spacing={3} align="center">
+            <Image
+              src="/assets/logosds.png"
+              alt="Logo"
+              boxSize={{
+                base: "50px",
+                md: "70px",
+              }}
+              transition="all 0.3s ease"
+            />
+            <Box>
+              <Text
+                fontWeight="bold"
+                fontSize={{
+                  base: "xl",
+                  md: "3xl",
+                }}
+                transition="all 0.3s ease"
+              >
+                SURYADEV SEEDS
+              </Text>
+              <Box borderBottom="0.2px solid" borderColor="black" />
+              <Text
+                fontSize={{ base: "xs", md: "sm" }}
+                color="gray.700"
+                whiteSpace="nowrap"
+              >
+                Improving Agriculture, Improving Lives.
+              </Text>
+            </Box>
+          </HStack>
+        </VStack>
         <HStack spacing={4}>
           <Link fontSize="sm" href="#">
             Terms and Conditions

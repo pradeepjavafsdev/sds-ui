@@ -16,17 +16,19 @@ function App() {
       <Box id="hero">
         <Hero />
       </Box>
+      <Box id="whysds" scrollMarginTop={{ base: "80px", md: "100px" }}>
+        <WhyChooseSDS />
+      </Box>
 
-      <WhyChooseSDS />
-      <Box id="products">
+      <Box id="products" scrollMarginTop={{ base: "80px", md: "100px" }}>
         <Product />
       </Box>
       <HappyFarmers />
       <AwardsAchievements />
-      <Box id="gallery">
+      <Box id="gallery" scrollMarginTop={{ base: "80px", md: "100px" }}>
         <Gallery />
       </Box>
-      <Box id="about">
+      <Box id="about" scrollMarginTop={{ base: "80px", md: "100px" }}>
         <AboutUs />
       </Box>
     </Box>

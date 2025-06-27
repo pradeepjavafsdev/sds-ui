@@ -2,6 +2,12 @@ import { Box, Heading, Text, Button, VStack } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 
 const MotionBox = motion(Box);
+const scrollToWhySDS = () => {
+  const element = document.getElementById("whysds");
+  if (element) {
+    element.scrollIntoView({ behavior: "smooth" });
+  }
+};
 
 const Hero = () => (
   <MotionBox
@@ -36,7 +42,12 @@ const Hero = () => (
       <Text fontSize="xl">
         Committed to quality and sustainability from seed to harvest.
       </Text>
-      <Button colorScheme="green" bg="green.400" _hover={{ bg: "green.500" }}>
+      <Button
+        colorScheme="green"
+        bg="green.400"
+        _hover={{ bg: "green.500" }}
+        onClick={scrollToWhySDS}
+      >
         Learn More
       </Button>
     </VStack>

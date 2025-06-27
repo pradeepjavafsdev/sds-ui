@@ -2,11 +2,9 @@ import {
   Box,
   Heading,
   Text,
-  VStack,
-  HStack,
   Image,
   IconButton,
-  Stack,
+  HStack,
   useBreakpointValue,
 } from "@chakra-ui/react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
@@ -62,7 +60,6 @@ const OurHappyFarmers = () => {
   };
 
   const visibleIndexes = getIndexes();
-
   const isMobile = useBreakpointValue({ base: true, md: false });
 
   return (
@@ -72,6 +69,7 @@ const OurHappyFarmers = () => {
       py={{ base: 12, md: 16 }}
       px={4}
       textAlign="center"
+      overflowY="hidden" // 🔧 This removes vertical scroll
     >
       <Heading mb={4} fontSize={{ base: "2xl", md: "3xl" }}>
         OUR HAPPY FARMERS
@@ -80,89 +78,94 @@ const OurHappyFarmers = () => {
         Hear from the farmers who trust and grow with Suryadev Seeds
       </Text>
 
-      <Box position="relative" maxW="960px" mx="auto">
-        {!isMobile && (
-          <IconButton
-            icon={<ChevronLeftIcon />}
-            aria-label="Previous"
-            onClick={prev}
-            size="sm"
-            borderRadius="full"
-            position="absolute"
-            left="-10"
-            top="50%"
-            transform="translateY(-50%)"
-            zIndex={1}
-            variant="solid"
-            colorScheme="green"
-          />
-        )}
+      <Box position="relative" maxW="960px" mx="auto" overflow="hidden">
+        {/* Navigation Buttons */}
+        <IconButton
+          icon={<ChevronLeftIcon />}
+          aria-label="Previous"
+          onClick={prev}
+          size="sm"
+          borderRadius="full"
+          position="absolute"
+          left="2"
+          top="50%"
+          transform="translateY(-50%)"
+          zIndex={10}
+          variant="solid"
+          colorScheme="green"
+        />
 
-        <Stack
-          direction={{ base: "column", md: "row" }}
-          spacing={6}
-          justify="center"
-          align="center"
-          overflow="hidden"
-        >
-          {visibleIndexes.map((index, i) => {
-            const farmer = farmers[index];
-            const isCenter = i === 1;
+        <Box overflowX="auto" overflowY="hidden" px={2}>
+          <HStack
+            spacing={4}
+            justify="center"
+            align="center"
+            minW="100%"
+            overflow="visible"
+            css={{
+              scrollSnapType: "x mandatory",
+              WebkitOverflowScrolling: "touch",
+              "&::-webkit-scrollbar": { display: "none" },
+            }}
+          >
+            {visibleIndexes.map((index, i) => {
+              const farmer = farmers[index];
+              const isCenter = i === 1;
 
-            return (
-              <MotionBox
-                key={farmer.name}
-                bg="white"
-                p={{ base: 4, md: 6 }}
-                borderRadius="lg"
-                boxShadow="lg"
-                textAlign="center"
-                minW={{ base: "100%", md: "250px" }}
-                maxW="250px"
-                transition={"0.6s ease-in-out"}
-                animate={{
-                  scale: isCenter ? 1.1 : 0.9,
-                  opacity: isCenter ? 1 : 0.6,
-                  filter: isCenter ? "blur(0px)" : "blur(1px)",
-                  zIndex: isCenter ? 2 : 1,
-                }}
-              >
-                <Image
-                  src={farmer.image}
-                  alt={farmer.name}
-                  borderRadius="full"
-                  boxSize="100px"
-                  mx="auto"
-                  mb={4}
-                  objectFit="cover"
-                />
-                <Text fontWeight="bold" mb={2}>
-                  {farmer.name}
-                </Text>
-                <Text fontSize="sm" color="gray.600">
-                  {farmer.message}
-                </Text>
-              </MotionBox>
-            );
-          })}
-        </Stack>
+              return (
+                <MotionBox
+                  key={farmer.name}
+                  bg="white"
+                  p={6}
+                  borderRadius="lg"
+                  boxShadow="lg"
+                  textAlign="center"
+                  minW="250px"
+                  maxW="250px"
+                  scrollSnapAlign="center"
+                  animate={{
+                    scale: isCenter ? 1.05 : 0.9,
+                    opacity: isCenter ? 1 : 0.6,
+                    filter: isCenter ? "blur(0px)" : "blur(1px)",
+                    zIndex: isCenter ? 2 : 1,
+                  }}
+                  transition="all 0.5s ease"
+                >
+                  <Image
+                    src={farmer.image}
+                    alt={farmer.name}
+                    borderRadius="full"
+                    boxSize="100px"
+                    mx="auto"
+                    mb={4}
+                    objectFit="cover"
+                  />
+                  <Text fontWeight="bold" mb={2}>
+                    {farmer.name}
+                  </Text>
+                  <Text fontSize="sm" color="gray.600">
+                    {farmer.message}
+                  </Text>
+                </MotionBox>
+              );
+            })}
+          </HStack>
+        </Box>
 
-        {!isMobile && (
-          <IconButton
-            icon={<ChevronRightIcon />}
-            aria-label="Next"
-            onClick={next}
-            size="sm"
-            borderRadius="full"
-            position="absolute"
-            right="-10"
-            top="50%"
-            transform="translateY(-50%)"
-            zIndex={1}
-            variant="solid"
-            colorScheme="green"
-          />
-        )}
+        <IconButton
+          icon={<ChevronRightIcon />}
+          aria-label="Next"
+          onClick={next}
+          size="sm"
+          borderRadius="full"
+          position="absolute"
+          right="2"
+          top="50%"
+          transform="translateY(-50%)"
+          zIndex={10}
+          variant="solid"
+          colorScheme="green"
+        />
       </Box>
     </Box>
   );
